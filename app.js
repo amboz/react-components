@@ -3,9 +3,9 @@ var GroceryList = (props) => (
     <h1>Groceries To Buy</h1>
     <ul>
       {
-        props.stuffToBuy.map(function(item) {
+        props.stuffToBuy.map(function(item, i) {
           return (
-            <GroceryListItem item={item} />
+            <GroceryListItem key = {i} item={item} />
           );
       })
       }
