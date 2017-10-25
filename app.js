@@ -1,7 +1,15 @@
-var GroceryList = () => (
+var GroceryList = (props) => (
   <div>
     <h1>Groceries To Buy</h1>
-    <GroceryListItem stuffToBuy={['omg', 'this works?', 'cool']}/>
+    <ul>
+      {
+        props.stuffToBuy.map(function(item) {
+          return (
+            <GroceryListItem item={item} />
+          );
+      })
+      }
+    </ul>
   </div>
 );
 
@@ -17,25 +25,20 @@ class GroceryListItem extends React.Component {
     this.setState({
       done: !this.state.done
     })
-    console.log('I got clicked!!!');
   }
 
   render() {
     var style = {
-      textDecoration: this.state.done ? 'line-through' : 'none'
+      fontWeight: this.state.done ? 'bold' : 'normal'
     };
 
     return (
-      <ul>
-      {
-        this.props.stuffToBuy.map((item) => {
-          return <li style={style} onClick={this.onListItemClick.bind(this)}>{item}</li>
-        })
-      }
-      </ul>
+      <li style={style} onClick={this.onListItemClick.bind(this)}>{this.props.item}</li>
     );
   }
 }
+
+ReactDOM.render(<GroceryList stuffToBuy={['1', '2','three']} />, document.getElementById("app"));
 
 // = (props) => {
 //   var onListItemClick = (event) => {
@@ -62,5 +65,3 @@ class GroceryListItem extends React.Component {
 // var MoreStuff = () => (
 //   <li>moar stuff</li>
 // );
-
-ReactDOM.render(<GroceryList />, document.getElementById("app"));
